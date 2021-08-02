@@ -4,7 +4,7 @@ module.exports = {
         'style-resources-loader': {
             'preProcessor': 'scss',
             'patterns': [
-                path.resolve(__dirname, './src/sass/global.scss'),
+                path.resolve(__dirname, './src/assets/sass/global.scss'),
             ]
         }
     }

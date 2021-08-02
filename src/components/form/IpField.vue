@@ -135,7 +135,7 @@ export default {
       }
 
       setTimeout(() => {
-        if (ipCopy.value[index] === 0) {
+        if (parseInt(ipCopy.value[index]) === 0) {
           moveToNextIpSegment(index, false)
         } else {
           moveToNextIpSegment(index)
@@ -166,7 +166,7 @@ export default {
      */
     const moveToNextIpSegment = (index, ifOverThree = true) => {
       if (ifOverThree) {
-        if (ipCopy.value[index].length >= 3 && ipCopy.value[index + 1] !== undefined) {
+        if (ipCopy.value[index].toString().length >= 3 && ipCopy.value[index + 1] !== undefined) {
           ipSegmentFields.value[index + 1].focus();
         } else if (ipCopy.value[index].toString().length >= 3 && ipCopy.value[index + 1] === undefined) {
           portSegmentField.value.focus();
@@ -325,22 +325,21 @@ export default {
 </script>
 
 <style lang="scss">
-$validColor: lightgreen;
 div.vue-ip {
   position: relative;
   display: inline-block;
   text-align: left;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid $white;
   padding: 6px;
-
+  user-select:none;
   .label {
     display: block;
-    position: absolute;
+    position: relative;
     width: 100%;
-    font-size: .6rem;
-    top: -20px;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: .75rem;
+    color: $white;
     text-transform: uppercase;
+    margin-bottom: 0.5rem;
   }
 
   .segment {
@@ -373,7 +372,7 @@ div.vue-ip {
     }
 
     &::placeholder {
-      color: rgba(#e0e0e0, .3)
+      color: $white-muted
     }
 
     &.port {
@@ -393,28 +392,28 @@ div.vue-ip {
   }
 
   &.active {
-    border-bottom-color: red;
+    border-bottom-color: $invalid-input-ip-color;
 
     .label {
-      color: red;
+      color: $invalid-input-ip-color;
     }
 
     .segment {
       &:after {
-        color: red;
+        color: $invalid-input-ip-color;
       }
     }
 
     &.valid {
-      border-bottom-color: $validColor;
+      border-bottom-color: $valid-input-ip-color;
 
       .label {
-        color: $validColor;
+        color: $valid-input-ip-color;
       }
 
       .segment {
         &:after {
-          color: $validColor;
+          color: $valid-input-ip-color;
         }
       }
     }
