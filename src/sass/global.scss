@@ -1,0 +1,16 @@
+@import "global/my-typos";
+@import "global/my-variables";
+@import "global/my-bootstrap";
+body{
+    background: #000;
+    color: white;
+    height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#app{
+    background: darkblue;
+    width: 512px;
+    height: 577px;
+}
