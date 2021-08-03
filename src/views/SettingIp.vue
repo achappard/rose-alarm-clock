@@ -1,6 +1,6 @@
 <template>
   <p class="text-muted fs-7 no-select">Aucune adresse ip n’est configurée pour le réveil.</p>
-  <IpField :ip="defaultIp" placeholder @changed="ipChanged"/>
+  <IpField :ip="defaultIp" placeholder @changed="ipChanged" @keypress.enter="handleEnterPress"/>
   <div id="valid-ip-btn-wrapper">
     <ButtonOrange @click="handleSaveIp" v-show="ipIsValid">Enregister</ButtonOrange>
   </div>
@@ -43,7 +43,15 @@ export default {
       this.setIpClockFromUserInput(this.validIp)
       // redirect
       this.$router.push({name:'Home'})
+    },
+    handleEnterPress(){
+      console.log("handleEnterPress");
+      if(this.ipIsValid && this.validIp){
+        console.log("we save !");
+        this.handleSaveIp();
+      }
     }
+    
   }
 }
 </script>
