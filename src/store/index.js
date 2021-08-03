@@ -1,8 +1,8 @@
 import { createStore } from 'vuex'
-import {ipClockStore} from './modules/ipClock'
+import {ipClockStore as IP_CLOCK_MODULE} from './modules/ipClock'
 const store = createStore({
   modules: {
-    ipClockStore
+    IP_CLOCK_MODULE
   }
 })
 

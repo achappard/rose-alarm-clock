@@ -1,0 +1,1 @@
+export const IP_CLOCK_MODULE = "IP_CLOCK_MODULE/";

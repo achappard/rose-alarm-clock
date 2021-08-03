@@ -1,5 +1,6 @@
 import {GET_IP_CLOCK, SET_IP_CLOCK_FROM_LOCAL_STORAGE, SET_IP_CLOCK_FROM_USER_INPUT} from "../mutation-types";
 export const ipClockStore = {
+    namespaced: true,
     state: {
         ipClock: false
     },

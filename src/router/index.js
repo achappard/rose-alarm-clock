@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import store from '../store/index'
 import Home from '../views/Home.vue'
 import {GET_IP_CLOCK} from "../store/mutation-types";
+import {IP_CLOCK_MODULE} from "../store/namespaces";
 
 const routes = [
     {
@@ -29,7 +30,7 @@ const router = createRouter({
 
 //Navigation Guards
 router.beforeEach((to, from, next) => {
-    const ip_from_store = store.getters[GET_IP_CLOCK]
+    const ip_from_store = store.getters[`${IP_CLOCK_MODULE}${GET_IP_CLOCK}`]
     if (to.name !== 'IpSettings' && !ip_from_store) {
         next({name: 'IpSettings'})
     } else if (to.name === 'IpSettings' && ip_from_store) {
