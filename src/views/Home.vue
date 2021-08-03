@@ -1,15 +1,14 @@
 <template>
   <div>
-    Ip Clock = {{ ipClock}}
+    Ip Clock = {{ ipClock }}
   </div>
 </template>
 <script>
+import {mapGetters} from "vuex"
 export default {
   name: "Home",
-  data(){
-    return {
-      ipClock: '192.168.0.2'
-    }
+  computed:{
+    ...mapGetters({ipClock: 'getIpClock'})
   },
 }
 </script>

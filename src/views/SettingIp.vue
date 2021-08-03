@@ -1,30 +1,54 @@
 <template>
-    <p class="text-muted fs-7 no-select">Aucune adresse ip n’est configurée pour le réveil.</p>
-  <IpField placeholder @changed="ipChanged"/>
+  <p class="text-muted fs-7 no-select">Aucune adresse ip n’est configurée pour le réveil.</p>
+  <IpField :ip="defaultIp" placeholder @changed="ipChanged"/>
   <div id="valid-ip-btn-wrapper">
-    <ButtonOrange>Enregister</ButtonOrange>
+    <ButtonOrange @click="handleSaveIp" v-show="ipIsValid">Enregister</ButtonOrange>
   </div>
 </template>
 
 <script>
 import ButtonOrange from "../components/form/ButtonOrange";
 import IpField from "../components/form/IpField";
-import {ref} from "vue";
-
+import {mapActions, mapGetters} from 'vuex';
 export default {
   name: 'App',
   components: {
     ButtonOrange,
     IpField
   },
-  setup() {
-    const ipIsValid = ref(false)
-    const ipChanged = (event) => {
-      ipIsValid.value = event.is_valid;
-      // console.log("ip reçue : " + event.ip + ", port:" + event.port + "  =>  " + (event.is_valid ? "Cette ip est valide" : "Cette Ip n'est pas valide") );
-      // console.log("ip formated = "+event.ip_formatted);
+  data(){
+    return {
+      ipIsValid: false,
+      validIp:false
     }
-    return {ipChanged, ipIsValid}
   },
+  computed:{
+    ...mapGetters({defaultIp :'getIpClock'}),
+  },
+  methods: {
+    ...mapActions(['setIpClockFromUserInput']),
+    /**
+     * Ip from the field is valid, we store it locally and update ipIsValid bool
+     * @param event
+     */
+    ipChanged(event)  {
+      this.validIp = event.is_valid ? event.ip_formatted : false
+      this.ipIsValid = event.is_valid;
+    },
+    /**
+     * Handle click on the Save button
+     */
+    handleSaveIp(){
+      // save new Ip in store
+      this.setIpClockFromUserInput(this.validIp)
+      // redirect
+      this.$router.push({name:'Home'})
+    }
+  }
 }
 </script>
+<style scoped>
+#valid-ip-btn-wrapper {
+  margin-top: 180px;
+}
+</style>

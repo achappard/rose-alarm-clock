@@ -1,24 +1,30 @@
 <template>
   <h1>Réveil de Rose</h1>
-  <div id="nav">
-    <router-link :to="{name:'Home'}">Home</router-link>
-    <router-link :to="{name:'IpSettings'}">Ip Setting</router-link>
+
+<!--    <router-link :to="{name:'Home'}">Home</router-link>
+    <router-link :to="{name:'IpSettings'}">Ip Setting</router-link>-->
     <router-view/>
-  </div>
+
 </template>
 
 <script>
+import {mapActions} from 'vuex';
 export default {
   name: 'App',
+  methods: {
+    ...mapActions(['setIpClockFromLocalStorage'])
+  },
+  mounted() {
+   //App mounted : retrieving ip saved in local Storage
+    this.setIpClockFromLocalStorage()
+  }
 }
 </script>
 
 <style lang="scss">
 #app {
   text-align: center;
-  background: #335958;
   background: $background-settings;
-  transition: background 1s ease;
   width: 512px;
   height: 577px;
 
@@ -30,7 +36,5 @@ export default {
   }
 }
 
-#valid-ip-btn-wrapper {
-  margin-top: 180px;
-}
+
 </style>
