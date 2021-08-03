@@ -1,10 +1,5 @@
 <template>
-  <h1>Réveil de Rose</h1>
-
-<!--    <router-link :to="{name:'Home'}">Home</router-link>
-    <router-link :to="{name:'IpSettings'}">Ip Setting</router-link>-->
     <router-view/>
-
 </template>
 
 <script>

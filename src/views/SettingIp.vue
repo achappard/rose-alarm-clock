@@ -1,4 +1,5 @@
 <template>
+  <h1>Réveil de Rose</h1>
   <p class="text-muted fs-7 no-select">Aucune adresse ip n’est configurée pour le réveil.</p>
   <IpField :ip="defaultIp" placeholder @changed="ipChanged" @keypress.enter="handleEnterPress"/>
   <div id="valid-ip-btn-wrapper">
