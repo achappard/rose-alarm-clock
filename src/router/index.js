@@ -11,8 +11,13 @@ const routes = [
     {
         path: '/setting-ip',
         name: 'IpSettings',
-        component: () => import(/* webpackChunkName: "about" */ '../views/SettingIp.vue')
-    }
+        component: () => import(/* webpackChunkName: "setting-ip" */ '../views/SettingIp.vue')
+    },
+    { 
+        path: '/:pathMatch(.*)*', 
+        name: 'NotFound',
+        component: () => import(/* webpackChunkName: "not-found" */ '../views/NotFound.vue') 
+    },
 ]
 
 
