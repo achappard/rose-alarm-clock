@@ -175,8 +175,9 @@ export default {
       } else {
         if (ipCopy.value[index + 1] !== undefined) {
           ipSegmentFields.value[index + 1].focus();
-        } else if (ipCopy.value[index + 1] === undefined) {
+        } else if (ipCopy.value[index + 1] === undefined && portSegmentField.value) {
           portSegmentField.value.focus();
+          
         }
 
       }
