@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-
+import {get_ip_saved} from './../composable/ipLocalStorage'
 const routes = [
     {
         path: '/',
@@ -10,16 +10,23 @@ const routes = [
     {
         path: '/setting-ip',
         name: 'IpSettings',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../views/SettingIp.vue')
     }
 ]
+
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
 })
 
+//Navigation Guards
+router.beforeEach((to, from, next) => {
+    if (to.name !== 'IpSettings' && !get_ip_saved()){
+        next({ name: 'IpSettings' })
+    }
+    else{
+        next()
+    }
+})
 export default router
