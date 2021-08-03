@@ -46,7 +46,7 @@ export default {
       required: false
     },
     ip: {
-      type: String,
+      type: [String, Boolean],
       default: '',
       required: false
     },

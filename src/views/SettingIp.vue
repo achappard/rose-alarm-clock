@@ -10,6 +10,8 @@
 import ButtonOrange from "../components/form/ButtonOrange";
 import IpField from "../components/form/IpField";
 import {mapActions, mapGetters} from 'vuex';
+import {GET_IP_CLOCK, SET_IP_CLOCK_FROM_USER_INPUT} from "../store/mutation-types";
+
 export default {
   name: 'App',
   components: {
@@ -23,10 +25,10 @@ export default {
     }
   },
   computed:{
-    ...mapGetters({defaultIp :'getIpClock'}),
+    ...mapGetters({defaultIp :GET_IP_CLOCK}),
   },
   methods: {
-    ...mapActions(['setIpClockFromUserInput']),
+    ...mapActions([SET_IP_CLOCK_FROM_USER_INPUT]),
     /**
      * Ip from the field is valid, we store it locally and update ipIsValid bool
      * @param event
@@ -40,14 +42,12 @@ export default {
      */
     handleSaveIp(){
       // save new Ip in store
-      this.setIpClockFromUserInput(this.validIp)
+      this[SET_IP_CLOCK_FROM_USER_INPUT](this.validIp)
       // redirect
       this.$router.push({name:'Home'})
     },
     handleEnterPress(){
-      console.log("handleEnterPress");
       if(this.ipIsValid && this.validIp){
-        console.log("we save !");
         this.handleSaveIp();
       }
     }

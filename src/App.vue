@@ -9,14 +9,15 @@
 
 <script>
 import {mapActions} from 'vuex';
+import {SET_IP_CLOCK_FROM_LOCAL_STORAGE} from "./store/mutation-types";
 export default {
   name: 'App',
   methods: {
-    ...mapActions(['setIpClockFromLocalStorage'])
+    ...mapActions([SET_IP_CLOCK_FROM_LOCAL_STORAGE])
   },
   mounted() {
    //App mounted : retrieving ip saved in local Storage
-    this.setIpClockFromLocalStorage()
+    this[SET_IP_CLOCK_FROM_LOCAL_STORAGE]()
   }
 }
 </script>
