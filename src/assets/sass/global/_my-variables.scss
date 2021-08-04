@@ -3,19 +3,22 @@ $white: #FFFFFF;
 $very-dark-blue: #002333;
 $dark-blue: #02455F;
 
-$very-light-blue:#2FA7D1;
-$light-blue:#1C88AD;
+$very-light-blue: #2FA7D1;
+$light-blue: #1C88AD;
 
-$invalid-input-ip-color:#fca311;
-$valid-input-ip-color:#05c329;
+$invalid-input-ip-color: #fca311;
+$valid-input-ip-color: #05c329;
 
-$text-muted:rgba($white, 0.6);
+$text-muted: rgba($white, 0.6);
 
-$white-muted:rgba($white, 0.3);
+$white-muted: rgba($white, 0.3);
 
 $background-settings: linear-gradient($very-dark-blue, $light-blue);
 $background-night: radial-gradient(ellipse at top 25% right 25%, $dark-blue, $very-dark-blue);
-$background-day: radial-gradient(ellipse at top 25% right 25%,$very-light-blue, $light-blue);
+$background-day: radial-gradient(ellipse at top 25% right 25%, $very-light-blue, $light-blue);
+
+$width-app: 512px;
+$height-app: 577px;
 
 // Bootstrap override
 $font-family-sans-serif: "Open Sans";

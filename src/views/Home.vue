@@ -3,15 +3,8 @@
     <h1>Réveil de Rose</h1>
     <ul class="list-unstyled">
       <li>Ip Clock = {{ ipClock }}</li>
-      <li>data.isBedTime : {{ isBedTime}}</li>
     </ul>
-    <div class="btn-group mt-3" role="group" aria-label="Basic radio toggle button group">
-      <input type="radio" class="btn-check" :value="false"  id="btnDay" @click="switchToDayPeriod(true)" v-model="isBedTime" autocomplete="off">
-      <label class="btn btn-outline-dark" for="btnDay">Jour</label>
-
-      <input type="radio" class="btn-check" :value="true"  id="btnNight" @click="switchToBedPeriod(true)"  v-model="isBedTime" autocomplete="off">
-      <label class="btn btn-outline-dark" for="btnNight">Nuit</label>
-    </div>
+    
   </DynamicBackground>
 </template>
 <script>
@@ -27,19 +20,13 @@ import DynamicBackground from "../components/DynamicBackground";
 export default {
   name: "Home",
   components:{
-    DynamicBackground,
+   DynamicBackground,
   },
   methods : {
     ...mapActions([
         `${PERIOD_CLOCK_MODULE}${SET_IS_BED_TIME}`,
         `${PERIOD_CLOCK_MODULE}${SET_IS_DAY_TIME}`,
     ]),
-    switchToDayPeriod(b){
-      this[`${PERIOD_CLOCK_MODULE}${SET_IS_DAY_TIME}`](b)
-    },
-    switchToBedPeriod(b){
-      this[`${PERIOD_CLOCK_MODULE}${SET_IS_BED_TIME}`](b)
-    }
   },
   computed:{
     ...mapGetters({

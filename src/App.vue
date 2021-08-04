@@ -1,11 +1,12 @@
 <template>
-    <router-view/>
+  <router-view/>
 </template>
 
 <script>
 import {mapActions} from 'vuex';
 import {SET_IP_CLOCK_FROM_LOCAL_STORAGE} from "./store/mutation-types";
 import {IP_CLOCK_MODULE} from "./store/namespaces";
+
 export default {
   name: 'App',
   methods: {
@@ -13,7 +14,7 @@ export default {
     ...mapActions([`${IP_CLOCK_MODULE}${SET_IP_CLOCK_FROM_LOCAL_STORAGE}`])
   },
   mounted() {
-   //App mounted : retrieving ip saved in local Storage
+    //App mounted : retrieving ip saved in local Storage
     this[`${IP_CLOCK_MODULE}${SET_IP_CLOCK_FROM_LOCAL_STORAGE}`]()
   }
 }
@@ -23,14 +24,15 @@ export default {
 #app {
   text-align: center;
   background: $background-settings;
-  width: 512px;
-  height: 577px;
+  width: $width-app;
+  height: $height-app;
 
   h1 {
     font-weight: 300;
     font-size: 3.875rem;
     user-select: none;
-    margin: 60px 0 20px 0;
+    padding: 60px 0 20px 0;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
   }
 }
 

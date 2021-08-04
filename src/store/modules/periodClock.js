@@ -24,6 +24,11 @@ export const periodClockStore = {
     },
     getters: {
         [GET_IS_BED_TIME]: state => state.isBedTime,
-        [GET_IS_DAY_TIME]: state => !state.isBedTime
+        [GET_IS_DAY_TIME]: state => {
+            if(state.isBedTime === null){
+                return null
+            }
+            return !state.isBedTime
+        }
     }
 }
