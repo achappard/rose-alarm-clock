@@ -5,7 +5,7 @@
          :class="{bedTime: isBedTime, dayTime: isDayTime}" 
          :style="defaultStyle">
     <BurgerIcon/>
-    <div id="settings-content">
+    <div id="settings-content" @click.self="handleClickBg">
       <h1>Réglages du réveil</h1>
     </div>
   </aside>
@@ -25,6 +25,13 @@ export default {
       defaultStyle: {}
     }
   },
+  created() {
+    window.document.addEventListener('keydown', this.keypressHandler)
+  },
+  unmounted() {
+    console.log("unmounted");
+    window.document.removeEventListener('keydown', this.keypressHandler)
+  },
   computed: {
     ...mapGetters({
       isMenuOpen: `${SETTINGS_CLOCK_MODULE}${GET_IS_MENU_OPEN}`,
@@ -38,6 +45,11 @@ export default {
       if(!this.isMenuOpen){
         this[`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]()
       }  
+    },
+    keypressHandler(){
+      if(this.isMenuOpen){
+        this[`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]()
+      }
     }
   },
   watch: {
@@ -76,7 +88,7 @@ aside#clock-settings {
   }
 
   &.bedTime {
-    background-color: rgba($black, .87);
+    background-color: rgba($black, .83);
   }
   #settings-content{
     margin-left: $width-close-menu;

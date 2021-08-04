@@ -1,11 +1,11 @@
 <template>
+  <ClockSettings/>
   <DynamicBackground>
     <h1>Réveil de Rose</h1>
     <ul class="list-unstyled">
       <li>Ip Clock = {{ ipClock }}</li>
     </ul>
   </DynamicBackground>
-  <ClockSettings/>
 </template>
 <script>
 import {mapGetters} from "vuex"
