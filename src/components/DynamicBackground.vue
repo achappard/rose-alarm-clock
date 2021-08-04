@@ -1,5 +1,5 @@
 <template>
-  <div id="dynamic-bg-wrapper" :class="{bedTime: isBedTime, dayTime: isDayTime}">
+  <div id="dynamic-bg-wrapper">
     <div ref="nightBG" id="night-bg" class="dynamic-bg"></div>
     <div ref="dayBg" id="day-bg" class="dynamic-bg"></div>
     <div id="inner-content-bg">

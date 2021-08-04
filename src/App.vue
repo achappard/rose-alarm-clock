@@ -4,7 +4,7 @@
 
 <script>
 import {mapActions} from 'vuex';
-import {SET_IP_CLOCK_FROM_LOCAL_STORAGE} from "./store/mutation-types";
+import { SET_IP_CLOCK_FROM_LOCAL_STORAGE} from "./store/mutation-types";
 import {IP_CLOCK_MODULE} from "./store/namespaces";
 
 export default {
@@ -26,6 +26,7 @@ export default {
   background: $background-settings;
   width: $width-app;
   height: $height-app;
+  overflow: hidden;
 
   h1 {
     font-weight: 300;

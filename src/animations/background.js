@@ -47,11 +47,11 @@ const swap_bg_div = (day_bg_on_foreground = false) => {
     const day_bg_el = tl_day.getChildren()[0].targets()[0];
     const night_bg_el = tl_night.getChildren()[0].targets()[0];
     if(day_bg_on_foreground){
-        console.log("Je swap pour mettre le bg day en premier plan");
+        // console.log("Je swap pour mettre le bg day en premier plan");
         gsap.set(day_bg_el, {zIndex: 2, autoAlpha: 0,})
         gsap.set(night_bg_el, {zIndex: 1})
     }else{
-        console.log("Je swap pour mettre le bg night en premier plan");
+        // console.log("Je swap pour mettre le bg night en premier plan");
         gsap.set(night_bg_el, {zIndex: 2, autoAlpha: 0,})
         gsap.set(day_bg_el, {zIndex: 1})
     }
