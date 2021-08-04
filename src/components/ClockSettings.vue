@@ -23,7 +23,6 @@ export default {
   methods :{
     ...mapActions([`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]),
     handleClickBg(){
-      console.log("click bg menu");
       if(!this.isMenuOpen){
         this[`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]()
       }  
@@ -55,6 +54,7 @@ aside#clock-settings {
   inset: 0;
   transform: translateX(-1 * $width-app + $width-close-menu);
   transition: background-color 1s ease-out .5s;
+  z-index: 40;
 
   &.dayTime {
     background-color: rgba($black, .93);

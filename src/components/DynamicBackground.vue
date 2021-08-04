@@ -2,23 +2,26 @@
   <div id="dynamic-bg-wrapper">
     <div ref="nightBG" id="night-bg" class="dynamic-bg"></div>
     <div ref="dayBg" id="day-bg" class="dynamic-bg"></div>
-    <div id="inner-content-bg">
+    <ClockContent>
       <slot/>
-    </div>
+    </ClockContent>
   </div>
 </template>
 
 <script>
-// import { gsap } from "gsap";
+
 import { PERIOD_CLOCK_MODULE} from "../store/namespaces";
 import {GET_IS_BED_TIME, GET_IS_DAY_TIME} from "../store/mutation-types";
 import {mapGetters} from "vuex";
 import {animations_init, animation_day, animation_night} from "../animations/background";
-
+import ClockContent from "./ClockContent";
 export default {
   name: "DynamicBackground",
   mounted() {
     animations_init(this.$refs.dayBg, this.$refs.nightBG)
+  },
+  components :{
+    ClockContent
   },
   watch: {
     isBedTime(newValue) {
@@ -44,7 +47,7 @@ export default {
   width: $width-app;
   height: $height-app;
   position: relative;
-
+  z-index: 2;
   .dynamic-bg {
     position: absolute;
     z-index: 1;
@@ -55,10 +58,5 @@ export default {
   }
   #day-bg{background: $background-day}
   #night-bg{background: $background-night}
-}
-
-#inner-content-bg {
-  position: relative;
-  z-index: 5;
 }
 </style>

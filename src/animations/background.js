@@ -3,6 +3,11 @@ import {gsap} from "gsap";
 let tl_day;
 let tl_night;
 
+/**
+ * Initialize gsap timelines for animation
+ * @param day_el The dom element for the day background
+ * @param night_el The dom element for the night background
+ */
 const animations_init = (day_el, night_el) => {
     const defaultTweenOptions = {duration: 1, ease:"power2.in"}
     // Day animation definition
@@ -21,6 +26,10 @@ const animations_init = (day_el, night_el) => {
     });
     tl_night.to(night_el, {autoAlpha: 1})
 };
+
+/**
+ * Animation to display the daytime background
+ */
 const animation_day = () => {
     tl_night.pause();
     swap_bg_div(true)
@@ -32,6 +41,9 @@ const animation_day = () => {
     }
 }
 
+/**
+ * Animation to display the night background
+ */
 const animation_night = () => {
     tl_day.pause();
     swap_bg_div(false)
@@ -43,15 +55,17 @@ const animation_night = () => {
     }
 }
 
+/**
+ * Swap the z-index of the div
+ * @param day_bg_on_foreground id the day background at foreground
+ */
 const swap_bg_div = (day_bg_on_foreground = false) => {
     const day_bg_el = tl_day.getChildren()[0].targets()[0];
     const night_bg_el = tl_night.getChildren()[0].targets()[0];
     if(day_bg_on_foreground){
-        // console.log("Je swap pour mettre le bg day en premier plan");
         gsap.set(day_bg_el, {zIndex: 2, autoAlpha: 0,})
         gsap.set(night_bg_el, {zIndex: 1})
     }else{
-        // console.log("Je swap pour mettre le bg night en premier plan");
         gsap.set(night_bg_el, {zIndex: 2, autoAlpha: 0,})
         gsap.set(day_bg_el, {zIndex: 1})
     }

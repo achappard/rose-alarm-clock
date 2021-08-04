@@ -1,11 +1,11 @@
 <template>
   <DynamicBackground>
     <h1>Réveil de Rose</h1>
-    <ClockSettings/>
     <ul class="list-unstyled">
       <li>Ip Clock = {{ ipClock }}</li>
     </ul>
   </DynamicBackground>
+  <ClockSettings/>
 </template>
 <script>
 import {mapGetters} from "vuex"
@@ -28,3 +28,13 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+h1 {
+  font-weight: 300;
+  font-size: 3.875rem;
+  user-select: none;
+  padding: 60px 0 20px 0;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+</style>

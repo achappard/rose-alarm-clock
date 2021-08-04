@@ -22,20 +22,10 @@ export default {
 
 <style lang="scss">
 #app {
-  text-align: center;
   background: $background-settings;
   width: $width-app;
   height: $height-app;
   overflow: hidden;
-
-  h1 {
-    font-weight: 300;
-    font-size: 3.875rem;
-    user-select: none;
-    padding: 60px 0 20px 0;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-  }
+  position: relative;
 }
-
-
 </style>
