@@ -1,6 +1,13 @@
 <template>
-  <aside id="clock-settings" @click.self="handleClickBg" :class="{bedTime: isBedTime, dayTime: isDayTime}" ref="menu">
+  <aside id="clock-settings"
+         ref="menu" 
+         @click.self="handleClickBg" 
+         :class="{bedTime: isBedTime, dayTime: isDayTime}" 
+         :style="defaultStyle">
     <BurgerIcon/>
+    <div id="settings-content">
+      <h1>Réglages du réveil</h1>
+    </div>
   </aside>
 </template>
 
@@ -13,6 +20,11 @@ import {closeMenu, openMenu} from "../animations/clockSettingMenu";
 
 export default {
   name: "ClockSettings",
+  data(){
+    return {
+      defaultStyle: {}
+    }
+  },
   computed: {
     ...mapGetters({
       isMenuOpen: `${SETTINGS_CLOCK_MODULE}${GET_IS_MENU_OPEN}`,
@@ -36,6 +48,9 @@ export default {
         closeMenu(this.$refs.menu)
       }
     }
+  },
+  mounted() {
+    this.defaultStyle = this.isMenuOpen ? {transform: 'translate(-35px, 0px)'} : {}
   },
   components: {
     BurgerIcon
@@ -62,6 +77,16 @@ aside#clock-settings {
 
   &.bedTime {
     background-color: rgba($black, .87);
+  }
+  #settings-content{
+    margin-left: $width-close-menu;
+    h1 {
+      font-weight: 300;
+      font-size: 2.875rem;
+      user-select: none;
+      padding: 60px 0 20px 0;
+      text-align: center;
+    }
   }
 }
 

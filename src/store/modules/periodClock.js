@@ -8,7 +8,7 @@ import {
 export const periodClockStore = {
     namespaced: true,
     state: {
-        isBedTime: null,
+        isBedTime: true,
     },
     mutations: {
         [SET_IS_BED_TIME]: (state, isBedTime) => {

@@ -1,5 +1,7 @@
 <template>
-  <div id="clock-content" ref="content">
+  <div id="clock-content" 
+       ref="content"
+       :style="defaultStyle">
     <slot/>
   </div>
 </template>
@@ -12,6 +14,14 @@ import {slideToLeft, slideToRight} from "../animations/slideMainContent";
 
 export default {
   name: "ClockContent",
+  data(){
+    return {
+      defaultStyle: {}
+    }
+  },
+  mounted() {
+    this.defaultStyle = this.isMenuOpen ? {transform: 'translate(512px, 0px)'} : {}
+  },
   computed: {
     // eslint-disable-next-line no-undef
     ...mapGetters({

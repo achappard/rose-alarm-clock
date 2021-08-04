@@ -1,7 +1,7 @@
 <template>
   <div id="dynamic-bg-wrapper" @click="handleClickBackground">
-    <div ref="nightBG" id="night-bg" class="dynamic-bg"></div>
-    <div ref="dayBg" id="day-bg" class="dynamic-bg"></div>
+    <div ref="nightBG" id="night-bg" class="dynamic-bg" :style="defaultStyleNightBg"></div>
+    <div ref="dayBg" id="day-bg" class="dynamic-bg" :style="defaultStyleDayBg"></div>
     <ClockContent>
       <slot/>
     </ClockContent>
@@ -15,37 +15,50 @@ import {GET_IS_BED_TIME, GET_IS_DAY_TIME, GET_IS_MENU_OPEN, TOGGLE_IS_OPEN} from
 import {mapGetters, mapActions} from "vuex";
 import {animations_init, animation_day, animation_night} from "../animations/background";
 import ClockContent from "./ClockContent";
+
 export default {
   name: "DynamicBackground",
+  data() {
+    return {
+      defaultStyleNightBg: {},
+      defaultStyleDayBg: {}
+    }
+  },
   mounted() {
     animations_init(this.$refs.dayBg, this.$refs.nightBG)
+
+    if(this.isBedTime === true ){
+      setTimeout( () => animation_night(), 1000);
+    }else if(this.isBedTime === false){
+      
+      setTimeout( () => animation_day(), 1000);
+    }
   },
-  components :{
+  components: {
     ClockContent
   },
   watch: {
     isBedTime(newValue) {
-      if(newValue){
+      if (newValue) {
         animation_night();
-      }
-      else {
+      } else {
         animation_day();
       }
     }
   },
-  methods:{
+  methods: {
     ...mapActions([`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]),
-    handleClickBackground(){
-      if(this.isMenuOpen){
+    handleClickBackground() {
+      if (this.isMenuOpen) {
         this[`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]()
       }
     }
   },
-  computed:{
+  computed: {
     ...mapGetters({
       isBedTime: `${PERIOD_CLOCK_MODULE}${GET_IS_BED_TIME}`,
-      isDayTime:`${PERIOD_CLOCK_MODULE}${GET_IS_DAY_TIME}`,
-      isMenuOpen:`${SETTINGS_CLOCK_MODULE}${GET_IS_MENU_OPEN}`
+      isDayTime: `${PERIOD_CLOCK_MODULE}${GET_IS_DAY_TIME}`,
+      isMenuOpen: `${SETTINGS_CLOCK_MODULE}${GET_IS_MENU_OPEN}`
     })
   }
 }
@@ -57,6 +70,7 @@ export default {
   height: $height-app;
   position: relative;
   z-index: 2;
+
   .dynamic-bg {
     position: absolute;
     z-index: 1;
@@ -65,7 +79,13 @@ export default {
     opacity: 0;
     visibility: hidden;
   }
-  #day-bg{background: $background-day}
-  #night-bg{background: $background-night}
+
+  #day-bg {
+    background: $background-day
+  }
+
+  #night-bg {
+    background: $background-night
+  }
 }
 </style>
