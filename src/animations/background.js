@@ -4,7 +4,6 @@ let tl_day;
 let tl_night;
 
 const animations_init = (day_el, night_el) => {
-    console.log("init des anim de bg")
     const defaultTweenOptions = {duration: 1, ease:"power2.in"}
     // Day animation definition
     tl_day = gsap.timeline({

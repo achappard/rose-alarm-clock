@@ -1,4 +1,8 @@
 import {GET_IP_CLOCK, SET_IP_CLOCK_FROM_LOCAL_STORAGE, SET_IP_CLOCK_FROM_USER_INPUT} from "../mutation-types";
+import {validateIp} from "../../composable/ipHelper";
+
+const IP_CLOCK_LOCAL_STORAGE_KEY = 'clock_ip';
+
 export const ipClockStore = {
     namespaced: true,
     state: {
@@ -20,17 +24,24 @@ export const ipClockStore = {
          */
         [SET_IP_CLOCK_FROM_USER_INPUT]: (state, newIp) => {
             state.ipClock = newIp
-            localStorage.setItem('clock_ip', newIp)
+            localStorage.setItem(IP_CLOCK_LOCAL_STORAGE_KEY, newIp)
         }
     },
     //pour les methodes assynchrones
     actions: {
         /**
-         * Commit the ip value from the localStorage if exist.
+         * Commit the ip value from the localStorage if exist AND is valid
          * If not commit false value
          * @param state
          */
-        [SET_IP_CLOCK_FROM_LOCAL_STORAGE]: state => state.commit(SET_IP_CLOCK_FROM_LOCAL_STORAGE, localStorage.getItem('clock_ip') || false),
+        [SET_IP_CLOCK_FROM_LOCAL_STORAGE]: state => {
+            const ipFromLocalStorage = (localStorage.getItem(IP_CLOCK_LOCAL_STORAGE_KEY))
+            if (ipFromLocalStorage && validateIp(ipFromLocalStorage)) {
+                state.commit(SET_IP_CLOCK_FROM_LOCAL_STORAGE, ipFromLocalStorage)
+            } else {
+                state.commit(SET_IP_CLOCK_FROM_LOCAL_STORAGE, false)
+            }
+        },
 
         /**
          * Commit the ip value from the user input in Settings Page
