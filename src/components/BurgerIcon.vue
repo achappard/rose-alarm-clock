@@ -1,6 +1,6 @@
 <template>
   <div id="burger-menu">
-    <input type="checkbox" />
+    <input type="checkbox" @click="handleClick" :checked="isMenuOpen"  />
     <span class="first"></span>
     <span class="middle"></span>
     <span class="last"></span>
@@ -8,8 +8,22 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+import {SETTINGS_CLOCK_MODULE} from "../store/namespaces";
+import {GET_IS_MENU_OPEN, TOGGLE_IS_OPEN} from "../store/mutation-types";
 export default {
-  name: "BurgerIcon"
+  name: "BurgerIcon",
+  methods:{
+    ...mapActions([`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]),
+    handleClick(){
+      this[`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]()
+    }
+  },
+  computed:{
+    ...mapGetters({
+        isMenuOpen:`${SETTINGS_CLOCK_MODULE}${GET_IS_MENU_OPEN}`
+    })
+  }
 }
 </script>
 
@@ -62,9 +76,9 @@ export default {
     border-radius: 3px;
     z-index: 1;
     transform-origin: 4px 0;
-    transition: transform .5s cubic-bezier(0.77,0.2,0.05,1.0),
-    background .5s cubic-bezier(0.77,0.2,0.05,1.0),
-    opacity .55s ease;
+    transition: transform .4s cubic-bezier(0.77,0.2,0.05,1.0) .1s,
+    background .4s cubic-bezier(0.77,0.2,0.05,1.0) .1s,
+    opacity .45s ease .1s;
 
     &.top{
       transform-origin: 0 100%;
