@@ -1,10 +1,13 @@
 <template>
-  <h1>Réveil de Rose</h1>
-  <p class="text-muted fs-7 no-select">Aucune adresse ip n’est configurée pour le réveil.</p>
-  <IpField :ip="defaultIp" placeholder @changed="ipChanged" @keypress.enter="handleEnterPress"/>
-  <div id="valid-ip-btn-wrapper">
-    <ButtonOrange @click="handleSaveIp" v-show="ipIsValid">Enregister</ButtonOrange>
+  <div class="text-center">
+    <h1>Réveil de Rose</h1>
+    <p class="text-muted fs-7 no-select">Aucune adresse ip n’est configurée pour le réveil.</p>
+    <IpField :ip="defaultIp" placeholder @changed="ipChanged" @keypress.enter="handleEnterPress"/>
+    <div id="valid-ip-btn-wrapper">
+      <ButtonOrange @click="handleSaveIp" v-show="ipIsValid">Enregister</ButtonOrange>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -20,14 +23,14 @@ export default {
     ButtonOrange,
     IpField
   },
-  data(){
+  data() {
     return {
       ipIsValid: false,
-      validIp:false
+      validIp: false
     }
   },
-  computed:{
-    ...mapGetters({defaultIp :`${IP_CLOCK_MODULE}${GET_IP_CLOCK}`}),
+  computed: {
+    ...mapGetters({defaultIp: `${IP_CLOCK_MODULE}${GET_IP_CLOCK}`}),
   },
   methods: {
     ...mapActions([`${IP_CLOCK_MODULE}${SET_IP_CLOCK_FROM_USER_INPUT}`]),
@@ -35,29 +38,37 @@ export default {
      * Ip from the field is valid, we store it locally and update ipIsValid bool
      * @param event
      */
-    ipChanged(event)  {
+    ipChanged(event) {
       this.validIp = event.is_valid ? event.ip_formatted : false
       this.ipIsValid = event.is_valid;
     },
     /**
      * Handle click on the Save button
      */
-    handleSaveIp(){
+    handleSaveIp() {
       // save new Ip in store
       this[`${IP_CLOCK_MODULE}${SET_IP_CLOCK_FROM_USER_INPUT}`](this.validIp)
       // redirect
-      this.$router.push({name:'Home'})
+      this.$router.push({name: 'Home'})
     },
-    handleEnterPress(){
-      if(this.ipIsValid && this.validIp){
+    handleEnterPress() {
+      if (this.ipIsValid && this.validIp) {
         this.handleSaveIp();
       }
     }
-    
+
   }
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
+h1 {
+  font-weight: 300;
+  font-size: 3.875rem;
+  user-select: none;
+  padding: 60px 0 20px 0;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
 #valid-ip-btn-wrapper {
   margin-top: 180px;
 }
