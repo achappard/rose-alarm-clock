@@ -1,5 +1,5 @@
 <template>
-  <div id="dynamic-bg-wrapper">
+  <div id="dynamic-bg-wrapper" @click="handleClickBackground">
     <div ref="nightBG" id="night-bg" class="dynamic-bg"></div>
     <div ref="dayBg" id="day-bg" class="dynamic-bg"></div>
     <ClockContent>
@@ -10,9 +10,9 @@
 
 <script>
 
-import { PERIOD_CLOCK_MODULE} from "../store/namespaces";
-import {GET_IS_BED_TIME, GET_IS_DAY_TIME} from "../store/mutation-types";
-import {mapGetters} from "vuex";
+import {PERIOD_CLOCK_MODULE, SETTINGS_CLOCK_MODULE} from "../store/namespaces";
+import {GET_IS_BED_TIME, GET_IS_DAY_TIME, GET_IS_MENU_OPEN, TOGGLE_IS_OPEN} from "../store/mutation-types";
+import {mapGetters, mapActions} from "vuex";
 import {animations_init, animation_day, animation_night} from "../animations/background";
 import ClockContent from "./ClockContent";
 export default {
@@ -33,10 +33,19 @@ export default {
       }
     }
   },
+  methods:{
+    ...mapActions([`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]),
+    handleClickBackground(){
+      if(this.isMenuOpen){
+        this[`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]()
+      }
+    }
+  },
   computed:{
     ...mapGetters({
       isBedTime: `${PERIOD_CLOCK_MODULE}${GET_IS_BED_TIME}`,
       isDayTime:`${PERIOD_CLOCK_MODULE}${GET_IS_DAY_TIME}`,
+      isMenuOpen:`${SETTINGS_CLOCK_MODULE}${GET_IS_MENU_OPEN}`
     })
   }
 }
