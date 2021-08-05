@@ -8,7 +8,7 @@ import {
 export const settingsClockStore = {
     namespaced: true,
     state: {
-        isMenuOpen: false,
+        isMenuOpen: true,
         ws_connection: false,
         ws_connection_status: 'CLOSED',
         weekSettings: {

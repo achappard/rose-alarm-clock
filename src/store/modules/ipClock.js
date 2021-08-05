@@ -1,4 +1,5 @@
 import {
+    GET_COMPLETE_IP,
     GET_IP_CLOCK,
     GET_PORT_CLOCK,
     SET_IP_CLOCK_FROM_LOCAL_STORAGE,
@@ -81,10 +82,18 @@ export const ipClockStore = {
     getters: {
         [GET_IP_CLOCK]: state => {
             if(state.portClock){
-                return `${state.ipClock}:${state.portClock}`
+                return `${state.ipClock}`
             }
             return state.ipClock
         },
-        [GET_PORT_CLOCK]: state => state.portClock
+        [GET_PORT_CLOCK]: state => state.portClock,
+        [GET_COMPLETE_IP] : state => {
+            if(state.portClock !== false && state.ipClock !== false){
+                return `${state.ipClock}:${state.portClock}`
+            }else if(state.ipClock !== false){
+                return state.ipClock
+            }
+            return false;
+        }
     }
 }

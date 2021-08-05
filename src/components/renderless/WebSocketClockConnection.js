@@ -1,7 +1,7 @@
 import {mapActions, mapGetters} from "vuex";
 import {IP_CLOCK_MODULE, PERIOD_CLOCK_MODULE, SETTINGS_CLOCK_MODULE} from "../../store/namespaces";
 import {
-    GET_IP_CLOCK,
+    GET_COMPLETE_IP,
     GET_WEB_SOCKETS_CONNECTION, SET_IS_BED_TIME, SET_TIME_CLOCK,
     SET_WEB_SOCKETS_CONNECTION,
     SET_WEB_SOCKETS_CONNECTION_STATUS, SET_WEEK_END_SETTINGS, SET_WEEK_SETTINGS
@@ -17,7 +17,7 @@ const WebSocketClockConnection = {
     
     computed: {
         ...mapGetters({
-                ipClock: `${IP_CLOCK_MODULE}${GET_IP_CLOCK}`,
+                ipClock: `${IP_CLOCK_MODULE}${GET_COMPLETE_IP}`,
                 connection: `${SETTINGS_CLOCK_MODULE}${GET_WEB_SOCKETS_CONNECTION}`
             }
         ),

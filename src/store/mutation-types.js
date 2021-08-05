@@ -26,6 +26,7 @@ export const SET_WEEK_END_SETTINGS = "SET_WEEK_END_SETTINGS";
 // ipClock Store
 export const GET_IP_CLOCK = "GET_IP_CLOCK";
 export const GET_PORT_CLOCK = "GET_PORT_CLOCK";
+export const GET_COMPLETE_IP = "GET_COMPLETE_IP";
 
 // PeriodClock Store
 export const GET_IS_BED_TIME = "GET_IS_BED_TIME";

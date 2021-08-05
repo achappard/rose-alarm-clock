@@ -8,7 +8,7 @@ const width_app = 512;
  */
 const slideToRight = (el) => {
     gsap.killTweensOf(el);
-     gsap.to(el, {x: width_app, ease: "expo.out", delay:.1});
+     gsap.to(el, {x: width_app / 2, autoAlpha:0, ease: "expo.out", delay:.1});
 }
 
 /**
@@ -17,6 +17,6 @@ const slideToRight = (el) => {
  */
 const slideToLeft = (el) => {
     gsap.killTweensOf(el);
-    gsap.to(el, {x: 0, ease: "expo.out", delay:.3});
+    gsap.to(el, {x: 0, autoAlpha:1, ease: "expo.out", delay:.3});
 }
 export {slideToRight, slideToLeft}

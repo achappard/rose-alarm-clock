@@ -1,13 +1,25 @@
 <template>
   <aside id="clock-settings"
-         ref="menu" 
-         @click.self="handleClickBg" 
-         :class="{bedTime: isBedTime, dayTime: isDayTime}" 
+         ref="menu"
+         @click.self="handleClickBg"
+         :class="{bedTime: isBedTime, dayTime: isDayTime}"
          :style="defaultStyle">
     <BurgerIcon/>
     <ConnectionStatusPill/>
     <div id="settings-content" @click="handleClickBg">
       <h1>Réglages du réveil</h1>
+      <form  @submit.prevent>
+        <div class="mb-5">
+          <HorairesFields label="Horaire en semaine" name="week_input"/>
+        </div>
+        <div class="mb-5">
+          <HorairesFields label="Horaire le week-end" name="weekend_input"/>
+        </div>
+        <div class="mb-5">
+          <IpField :ip="defaultIp" :port="defaultPort"/>
+        </div>
+        <ButtonOrange>Enregistrer</ButtonOrange>
+      </form>
     </div>
   </aside>
 </template>
@@ -15,9 +27,18 @@
 <script>
 import BurgerIcon from "../components/BurgerIcon";
 import ConnectionStatusPill from "../components/ConnectionStatusPill";
+import IpField from "../components/form/IpField";
+import HorairesFields from "../components/form/HorairesFields";
+import ButtonOrange from "../components/form/ButtonOrange";
 import {mapActions, mapGetters} from "vuex"
-import {PERIOD_CLOCK_MODULE, SETTINGS_CLOCK_MODULE} from "../store/namespaces";
-import {GET_IS_BED_TIME, GET_IS_DAY_TIME, GET_IS_MENU_OPEN, TOGGLE_IS_OPEN} from "../store/mutation-types";
+import {IP_CLOCK_MODULE, PERIOD_CLOCK_MODULE, SETTINGS_CLOCK_MODULE} from "../store/namespaces";
+import {
+  GET_IP_CLOCK,
+  GET_IS_BED_TIME,
+  GET_IS_DAY_TIME,
+  GET_IS_MENU_OPEN, GET_PORT_CLOCK,
+  TOGGLE_IS_OPEN
+} from "../store/mutation-types";
 import {closeMenu, openMenu} from "../animations/clockSettingMenu";
 
 export default {
@@ -25,8 +46,11 @@ export default {
   components: {
     BurgerIcon,
     ConnectionStatusPill,
+    IpField,
+    HorairesFields,
+    ButtonOrange,
   },
-  data(){
+  data() {
     return {
       defaultStyle: {}
     }
@@ -43,18 +67,20 @@ export default {
     ...mapGetters({
       isMenuOpen: `${SETTINGS_CLOCK_MODULE}${GET_IS_MENU_OPEN}`,
       isBedTime: `${PERIOD_CLOCK_MODULE}${GET_IS_BED_TIME}`,
-      isDayTime:`${PERIOD_CLOCK_MODULE}${GET_IS_DAY_TIME}`,
+      isDayTime: `${PERIOD_CLOCK_MODULE}${GET_IS_DAY_TIME}`,
+      defaultIp: `${IP_CLOCK_MODULE}${GET_IP_CLOCK}`,
+      defaultPort: `${IP_CLOCK_MODULE}${GET_PORT_CLOCK}`,
     })
   },
-  methods :{
+  methods: {
     ...mapActions([`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]),
-    handleClickBg(){
-      if(!this.isMenuOpen){
+    handleClickBg() {
+      if (!this.isMenuOpen) {
         this[`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]()
-      }  
+      }
     },
-    keypressHandler(event){
-      if(this.isMenuOpen && event.code === "Escape"){
+    keypressHandler(event) {
+      if (this.isMenuOpen && event.code === "Escape") {
         this[`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]()
       }
     }
@@ -94,15 +120,25 @@ aside#clock-settings {
   &.bedTime {
     background-color: rgba($black, .83);
   }
-  #settings-content{
+
+  #settings-content {
     margin-left: $width-close-menu;
     h1 {
       font-weight: 300;
       font-size: 2.875rem;
       user-select: none;
-      padding: 60px 0 20px 0;
+      padding: 60px 0 30px 0;
       text-align: center;
     }
+    form{
+      margin: 0px auto;
+      width: 300px;
+      button{
+        display: block;
+        margin: 0px auto;
+      }
+    }
+    
   }
 }
 

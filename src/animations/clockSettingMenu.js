@@ -10,12 +10,15 @@ const width_burger = 35;
 const openMenu = (el) => {
     const sectionContentEl = el.querySelector("#settings-content");
     const title = sectionContentEl.querySelector("h1")
+    const form = sectionContentEl.querySelector("form")
     gsap.killTweensOf(el);
     gsap.killTweensOf(title);
+    gsap.killTweensOf(form);
     
     const tl = gsap.timeline();
     tl.to(el, {x: (width_burger * -1), ease: "expo.out"})
-        .fromTo(title, {x:-20, autoAlpha:0},{x:0, autoAlpha:1}, '-=0.4');
+        .fromTo(title, {x:-20, autoAlpha:0},{x:0, autoAlpha:1}, '-=0.4')
+        .fromTo(form, {x:-20, autoAlpha:0},{x:0, autoAlpha:1}, '-=0.4');
     
 }
 
@@ -26,12 +29,14 @@ const openMenu = (el) => {
 const closeMenu = (el) => {
     const sectionContentEl = el.querySelector("#settings-content");
     const title = sectionContentEl.querySelector("h1")
+    const form = sectionContentEl.querySelector("form")
     gsap.killTweensOf(el);
     gsap.killTweensOf(title);
-    //gsap.to(el, {x: (width_app - width_burger) * -1, ease: "expo.out"});
+    gsap.killTweensOf(form);
     
     const tl = gsap.timeline();
-    tl.to(title, {x:0, autoAlpha:0})
+    tl.to(form, {x:0, autoAlpha:0})
+        .to(title, {x:0, autoAlpha:0},'-=0.3')
         .to(el, {x: (width_app - width_burger) * -1, ease: "expo.out"},'-=0.3');
 }
 
