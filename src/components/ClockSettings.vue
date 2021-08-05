@@ -5,6 +5,7 @@
          :class="{bedTime: isBedTime, dayTime: isDayTime}" 
          :style="defaultStyle">
     <BurgerIcon/>
+    <ConnectionStatusPill/>
     <div id="settings-content" @click="handleClickBg">
       <h1>Réglages du réveil</h1>
     </div>
@@ -13,6 +14,7 @@
 
 <script>
 import BurgerIcon from "../components/BurgerIcon";
+import ConnectionStatusPill from "../components/ConnectionStatusPill";
 import {mapActions, mapGetters} from "vuex"
 import {PERIOD_CLOCK_MODULE, SETTINGS_CLOCK_MODULE} from "../store/namespaces";
 import {GET_IS_BED_TIME, GET_IS_DAY_TIME, GET_IS_MENU_OPEN, TOGGLE_IS_OPEN} from "../store/mutation-types";
@@ -20,16 +22,21 @@ import {closeMenu, openMenu} from "../animations/clockSettingMenu";
 
 export default {
   name: "ClockSettings",
+  components: {
+    BurgerIcon,
+    ConnectionStatusPill,
+  },
   data(){
     return {
       defaultStyle: {}
     }
   },
   created() {
+    // console.log("listen esc keyboard ");
     window.document.addEventListener('keydown', this.keypressHandler)
   },
   unmounted() {
-    console.log("unmounted");
+    // console.log("unmounted");
     window.document.removeEventListener('keydown', this.keypressHandler)
   },
   computed: {
@@ -46,8 +53,8 @@ export default {
         this[`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]()
       }  
     },
-    keypressHandler(){
-      if(this.isMenuOpen){
+    keypressHandler(event){
+      if(this.isMenuOpen && event.code === "Escape"){
         this[`${SETTINGS_CLOCK_MODULE}${TOGGLE_IS_OPEN}`]()
       }
     }
@@ -64,9 +71,6 @@ export default {
   mounted() {
     this.defaultStyle = this.isMenuOpen ? {transform: 'translate(-35px, 0px)'} : {}
   },
-  components: {
-    BurgerIcon
-  }
 }
 </script>
 

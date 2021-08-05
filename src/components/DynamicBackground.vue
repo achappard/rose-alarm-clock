@@ -13,7 +13,7 @@
 import {PERIOD_CLOCK_MODULE, SETTINGS_CLOCK_MODULE} from "../store/namespaces";
 import {GET_IS_BED_TIME, GET_IS_DAY_TIME, GET_IS_MENU_OPEN, TOGGLE_IS_OPEN} from "../store/mutation-types";
 import {mapGetters, mapActions} from "vuex";
-import {animations_init, animation_day, animation_night} from "../animations/background";
+import {animations_init, animation_day, animation_night, animation_remove_bgs} from "../animations/background";
 import ClockContent from "./ClockContent";
 
 export default {
@@ -30,7 +30,6 @@ export default {
     if(this.isBedTime === true ){
       setTimeout( () => animation_night(), 1000);
     }else if(this.isBedTime === false){
-      
       setTimeout( () => animation_day(), 1000);
     }
   },
@@ -39,10 +38,14 @@ export default {
   },
   watch: {
     isBedTime(newValue) {
-      if (newValue) {
+      console.log("isBedTime  =" + newValue);
+      if (newValue === true) {
         animation_night();
-      } else {
+      } else if(newValue === false) {
         animation_day();
+      } else{
+        console.log("remove bg");
+        animation_remove_bgs();
       }
     }
   },

@@ -2,7 +2,7 @@ import {gsap} from "gsap";
 
 let tl_day;
 let tl_night;
-
+let tl_remove;
 /**
  * Initialize gsap timelines for animation
  * @param day_el The dom element for the day background
@@ -25,6 +25,10 @@ const animations_init = (day_el, night_el) => {
         defaults: defaultTweenOptions
     });
     tl_night.to(night_el, {autoAlpha: 1})
+    
+    // remove bg
+    tl_remove = gsap.timeline({paused:true, defaults: defaultTweenOptions})
+    tl_remove.to([day_el, night_el], {autoAlpha:0})
 };
 
 /**
@@ -55,6 +59,9 @@ const animation_night = () => {
     }
 }
 
+const animation_remove_bgs = () => {
+    tl_remove.restart();
+}
 /**
  * Swap the z-index of the div
  * @param day_bg_on_foreground id the day background at foreground
@@ -71,4 +78,4 @@ const swap_bg_div = (day_bg_on_foreground = false) => {
     }
 }
 
-export {animation_day, animation_night, animations_init}
+export {animation_day, animation_night, animations_init, animation_remove_bgs}
