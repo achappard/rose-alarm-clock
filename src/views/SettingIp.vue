@@ -2,7 +2,7 @@
   <div class="text-center">
     <h1>Réveil de Rose</h1>
     <p class="text-muted fs-7 no-select">Aucune adresse ip n’est configurée pour le réveil.</p>
-    <IpField :ip="defaultIp" placeholder @changed="ipChanged" @keypress.enter="handleEnterPress"/>
+    <IpField :ip="defaultIp" :port="true" placeholder @changed="ipChanged" @keypress.enter="handleEnterPress"/>
     <div id="valid-ip-btn-wrapper">
       <ButtonOrange @click="handleSaveIp" v-show="ipIsValid">Enregister</ButtonOrange>
     </div>

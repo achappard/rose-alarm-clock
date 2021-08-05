@@ -1,7 +1,9 @@
 <template>
   <ClockSettings/>
+  <WebSocketClockClient/>
   <DynamicBackground>
     <h1>Réveil de Rose</h1>
+    
     <ul class="list-unstyled">
       <li>Ip Clock = {{ ipClock }}</li>
     </ul>
@@ -13,12 +15,14 @@ import {GET_IP_CLOCK} from "../store/mutation-types";
 import {IP_CLOCK_MODULE} from "../store/namespaces";
 import DynamicBackground from "../components/DynamicBackground";
 import ClockSettings from "../components/ClockSettings";
+import WebSocketClockClient from "../components/renderless/WebSocketClockConnection";
 
 export default {
   name: "Home",
   components: {
     DynamicBackground,
     ClockSettings,
+    WebSocketClockClient,
   },
   computed: {
     ...mapGetters({

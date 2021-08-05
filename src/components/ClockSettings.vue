@@ -5,7 +5,7 @@
          :class="{bedTime: isBedTime, dayTime: isDayTime}" 
          :style="defaultStyle">
     <BurgerIcon/>
-    <div id="settings-content" @click.self="handleClickBg">
+    <div id="settings-content" @click="handleClickBg">
       <h1>Réglages du réveil</h1>
     </div>
   </aside>
